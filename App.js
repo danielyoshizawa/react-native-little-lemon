@@ -3,11 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header'
 import Onboarding from './screens/Onboarding'
 import Home from './screens/Home'
+import Profile from './screens/Profile'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Home />
+      <Profile />
     </View>
   );
 }
