@@ -4,10 +4,10 @@ import Hero from '../components/Hero'
 import Menu from '../components/Menu'
 import FoodList from '../components/FoodList'
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style={styles.container}>
-      <Header style={styles}/>
+      <Header style={styles} navigation={navigation}/>
       <Hero style={styles} />
       <Menu style={styles} />
       <FoodList style={styles} />
@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   hero:{
     alignSelf: 'stretch',

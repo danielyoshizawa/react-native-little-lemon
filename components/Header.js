@@ -1,4 +1,10 @@
-import { StyleSheet, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Pressable,
+} from 'react-native';
 
 export default function Header(props) {
   return (
@@ -7,6 +13,13 @@ export default function Header(props) {
         source={require("../assets/Logo.png")}
         style={props.style.logo}
       />
+      <Pressable
+        onPress={() => {
+          props.navigation.navigate('Profile')
+        }}
+      >
+        <Text>Profile</Text>
+      </Pressable>
     </View>
   )
 }
