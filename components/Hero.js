@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
+import Search from './Search'
 
-export default function Hero() {
+export default function Hero(props) {
   return (
-    <View style={styles.container}>
+    <View style={props.style.hero}>
       <View>
         <Text>
           Little Lemon
@@ -10,6 +11,8 @@ export default function Hero() {
         <Text>
           Chicago
         </Text>
+      </View>
+      <View style={props.style.subhero}>
         <Text>
           We are a family owned{'\n'}
           Mediterranean restaurant,{'\n'}
@@ -17,26 +20,12 @@ export default function Hero() {
           recipes served with a{'\n'}
           modern twist.
         </Text>
-      </View>
-      <View>
         <Image
           source={require('../assets/Hero_image.png')}
-          style={styles.photo}
+          style={props.style.photo}
         />
       </View>
+      <Search style={props.style} />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  photo: {
-    width: 100,
-    height: 120,
-    resizeMode: 'cover'
-  }
-})

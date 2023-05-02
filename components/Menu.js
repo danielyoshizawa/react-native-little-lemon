@@ -21,10 +21,10 @@ const DATA = [
 ]
 
 const Item = ({item}) => (
-  <Text style={styles.item}>{item.title}</Text>
+  <Text>{item.title}</Text>
 )
 
-export default function Menu() {
+export default function Menu(props) {
   const renderItem = ({item}) => {
     return (
       <Item
@@ -34,7 +34,7 @@ export default function Menu() {
   }
 
   return (
-      <View style={styles.container}>
+      <View style={props.style.menu}>
         <Text>ORDER FOR DELIVERY!</Text>
         <FlatList
           horizontal
@@ -45,14 +45,3 @@ export default function Menu() {
       </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 0,
-    margin: 0
-  },
-  item: {
-    fontSize: 15,
-  }
-})

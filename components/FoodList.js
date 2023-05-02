@@ -22,9 +22,9 @@ const DATA = [
   }
 ]
 
-export default function FoodList() {
+export default function FoodList(props) {
   return (
-    <View style={styles.container}>
+    <View style={props.style.food}>
       <FlatList
         data={DATA}
         renderItem={({item}) => (<Food item={item} />)}
@@ -33,14 +33,3 @@ export default function FoodList() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 0,
-    margin: 0
-  },
-  item: {
-    fontSize: 15,
-  }
-})

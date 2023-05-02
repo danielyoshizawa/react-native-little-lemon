@@ -1,20 +1,12 @@
 import { StyleSheet, View, Image } from 'react-native';
 
-export default function Header() {
+export default function Header(props) {
   return (
-    <View>
+    <View style={props.style.header}>
       <Image
         source={require("../assets/Logo.png")}
-        style={styles.logo}
+        style={props.style.logo}
       />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    width: 160,
-    height: 65,
-    resizeMode: 'contain'
-  }
-})
