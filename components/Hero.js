@@ -25,7 +25,6 @@ export default function Hero(props) {
           style={props.style.photo}
         />
       </View>
-      <Search style={props.style} />
     </View>
   )
 }

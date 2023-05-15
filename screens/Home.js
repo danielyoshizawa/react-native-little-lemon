@@ -2,27 +2,24 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Menu from '../components/Menu'
-import FoodList from '../components/FoodList'
 
 export default function Home({navigation}) {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header style={styles} navigation={navigation}/>
       <Hero style={styles} />
       <Menu style={styles} />
-      <FoodList style={styles} />
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: 'column'
   },
   header: {
-    backgroundColor: 'green',
+    backgroundColor: '#495E57',
     alignSelf: 'stretch',
     alignItems: 'center',
     marginBottom: 10,
@@ -32,7 +29,8 @@ const styles = StyleSheet.create({
   hero:{
     alignSelf: 'stretch',
     padding: 10,
-    backgroundColor: 'green'
+    backgroundColor: '#495E57',
+    color: 'white'
   },
   subhero: {
     flexDirection: 'row',
@@ -41,9 +39,14 @@ const styles = StyleSheet.create({
   },
   search: {
     alignSelf: 'stretch',
-    backgroundColor: 'pink',
-    marginTop: 10,
-    padding: 10,
+    backgroundColor: '#495E57',
+    marginTop: 0,
+    padding: 0,
+    borderRadius: 0,
+  },
+  menuContainer:{
+    alignSelf: 'stretch',
+
   },
   menu: {
   },
