@@ -7,8 +7,8 @@ import Info from '../components/Info'
 export default function Onboarding() {
   return (
     <View style={styles.container}>
-      <Header />
-      <Hero />
+      <Header style={styles} />
+      <Hero style={styles} />
       <Info />
     </View>
   )
@@ -18,5 +18,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-  }
+  },
+  header: {
+    backgroundColor: 'white',
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  hero:{
+    alignSelf: 'stretch',
+    padding: 10,
+    backgroundColor: '#495E57',
+    color: 'white',
+  },
+  subhero: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    alignSelf: 'stretch',
+  },
+  photo: {
+    width: 100,
+    height: 120,
+    resizeMode: 'cover',
+    borderRadius: 10,
+  },
+  logo: {
+    width: 160,
+    height: 65,
+    resizeMode: 'contain'
+  },
 })
