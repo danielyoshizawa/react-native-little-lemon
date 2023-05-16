@@ -3,7 +3,7 @@ import Search from './Search'
 
 export default function Hero(props) {
   return (
-    <View style={[props.style.hero, {paddingVertical: 2}]}>
+    <View style={[props.style.hero, {paddingVertical: 4}]}>
       <View>
         <Text style={{color:'#F4CE14', fontSize:32, fontWeight:"bold"}}>
           Little Lemon
