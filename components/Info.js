@@ -3,23 +3,84 @@ import {
   Text,
   TextInput,
   View,
-  Pressable
+  Pressable,
+  Alert
 } from 'react-native';
 
-export default function Info() {
+import {useState, useEffect} from 'react'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export default function Info(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@onboarding', jsonValue)
+    } catch (e) {
+      console.err(e)
+    }
+  }
+
+  useEffect(() => {
+    ( async () => {
+      try {
+        const dt = await AsyncStorage.getItem('@onboarding')
+        const dataObj = JSON.parse(dt)
+        setName(dataObj.name ? dataObj.name : "")
+        setEmail(dataObj.email ? dataObj.email : "")
+      } catch (e) {
+        console.err(e)
+      }
+    })()
+  }, [])
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const dt = {
+          name : name,
+          email : email
+        }
+        storeData(dt)
+      } catch (e) {
+        console.err(e)
+      }
+    })()
+  }, [name, email])
+
+  const onNext = () => {
+    const dt = {
+      name : name,
+      email : email,
+      isOnboardingCompleted : true,
+    }
+    storeData(dt)
+    props.navigation.navigate('Home')
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Name *</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
+        onChangeText={(data) => setName(data)}
+        value={name}
       />
       <Text style={styles.label}>Email *</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
+        onChangeText={(data) => setEmail(data)}
+        value={email}
       />
-      <Pressable style={styles.button}>
+      <Pressable
+        style={styles.button}
+        onPress={onNext}
+      >
         <Text>Next</Text>
       </Pressable>
     </View>

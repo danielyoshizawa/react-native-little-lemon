@@ -4,12 +4,12 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Info from '../components/Info'
 
-export default function Onboarding() {
+export default function Onboarding({navigation}) {
   return (
     <View style={styles.container}>
       <Header style={styles} />
       <Hero style={styles} />
-      <Info />
+      <Info navigation={navigation}/>
     </View>
   )
 }
