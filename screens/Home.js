@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   header: {
-    backgroundColor: '#495E57',
+    backgroundColor: 'white',
     alignSelf: 'stretch',
     alignItems: 'center',
     marginBottom: 10,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   hero:{
     alignSelf: 'stretch',

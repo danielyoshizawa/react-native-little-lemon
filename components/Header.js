@@ -13,13 +13,17 @@ export default function Header(props) {
         source={require("../assets/Logo.png")}
         style={props.style.logo}
       />
-      <Pressable
-        onPress={() => {
-          props.navigation.navigate('Profile')
-        }}
+      <View
+        style={{marginHorizontal: 20}}
       >
-        <Text>Profile</Text>
-      </Pressable>
+        <Pressable
+          onPress={() => {
+            props.navigation.navigate('Profile')
+          }}
+        >
+          <Text>Profile</Text>
+        </Pressable>
+      </View>
     </View>
   )
 }
