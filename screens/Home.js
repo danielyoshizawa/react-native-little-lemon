@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 10,
     backgroundColor: '#495E57',
-    color: 'white'
+    color: 'white',
   },
   subhero: {
     flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'stretch'
+    alignItems: 'baseline',
+    alignSelf: 'stretch',
   },
   search: {
     alignSelf: 'stretch',
