@@ -5,7 +5,8 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  Alert
+  Alert,
+  Image
 } from 'react-native'
 
 import {useState, useEffect} from 'react'
@@ -13,6 +14,8 @@ import {useState, useEffect} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BouncyCheckbox from "react-native-bouncy-checkbox"
+
+import * as ImagePicker from 'expo-image-picker'
 
 export default function Porfile({navigation}) {
   const [firstName, setFirstName] = useState("")
@@ -25,6 +28,7 @@ export default function Porfile({navigation}) {
     special: false,
     news : false
   })
+  const [image, setImage] = useState(null)
 
   let orderCB: BouncyCheckbox | null = null;
   let passwordCB: BouncyCheckbox | null = null;
@@ -40,6 +44,19 @@ export default function Porfile({navigation}) {
     }
   }
 
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('@profile')
+      navigation.navigate('Onboarding')
+    } catch (e) {
+      // console.err(e)
+    }
+  }
+
+  const onLogout = () => {
+    logout()
+  }
+
   useEffect(() => {
     ( async () => {
       try {
@@ -47,11 +64,13 @@ export default function Porfile({navigation}) {
         const dataObj = JSON.parse(dt)
         const ob = await AsyncStorage.getItem('@onboarding')
         const obObj = JSON.parse(ob)
+        const img = await AsyncStorage.getItem('@image')
         setFirstName(dataObj.firstName ? dataObj.firstName : obObj.name ? obObj.name : "")
         setLastName(dataObj.lastName ? dataObj.lastName : "")
         setEmail(dataObj.email ? dataObj.email : obObj.email ? obObj.email : "")
         setPhone(dataObj.phone ? dataObj.phone : "")
         setNotifications({...dataObj.notifications})
+        setImage(img)
         orderCB.isChecked(notifications.order)
         passwordCB.isChecked(notifications.password)
         specialCB.isChecked(notifications.special)
@@ -62,13 +81,61 @@ export default function Porfile({navigation}) {
     })()
   }, [])
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+    if (!result.canceled) {
+      setImage(result.assets[0].uri)
+    }
+  }
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await AsyncStorage.setItem('@image',image)
+      } catch (e) {
+        // console.err(e)
+      }
+    })()
+  },[image])
+
+  const removeImage = async () => {
+    try {
+      await AsyncStorage.removeItem('@image')
+      setImage(null)
+    } catch (e) {
+      // console.err(e)
+    }
+  }
+
   return (
     <ScrollView>
       <Text style={{fontSize:18, marginVertical: 10, marginHorizontal: 5}}>Personal Information</Text>
       <View style={{flexDirection:'row', alignItems:'center'}}>
-        <Text style={{paddingHorizontal:10}}>Avatar</Text>
-        <Pressable><Text style={[styles.button, {backgroundColor: '#495E57', color:"#EDEFEE"}]}>Change</Text></Pressable>
-        <Pressable><Text style={styles.button}>Remove</Text></Pressable>
+        {
+          image ?
+          <Image
+            source={{uri: image}}
+            style={{paddingHorizontal:10, height: 50, width: 50, borderRadius: 25, borderColor: 'black', borderWidth: 1}}
+          />
+          :
+          <Image
+            source={require('../assets/Logo.png')}
+            style={{paddingHorizontal:10, height: 50, width: 50, borderRadius: 25, borderColor: 'black', borderWidth: 1}}
+          />
+        }
+        <Pressable
+          style={[styles.button, {backgroundColor: '#495E57', color:"#EDEFEE"}]}
+          onPress={pickImage}
+        ><Text>Change</Text></Pressable>
+        <Pressable
+          style={styles.button}
+          onPress={removeImage}
+        ><Text>Remove</Text></Pressable>
       </View>
       <View>
         <Text style={styles.label}>First Name</Text>
@@ -116,9 +183,7 @@ export default function Porfile({navigation}) {
         />
       </View>
       <Pressable style={[styles.button, {backgroundColor: '#F4CE14', color:'#333333', marginTop:20, alignItems: 'center'}]}
-        onPress={() => {
-          // TODO : Set isOnboardingCompleted : false and move to onboarding
-        }}
+        onPress={onLogout}
       ><Text>Log out</Text></Pressable>
       <View
         style={{flexDirection: "row", alignSelf:"center"}}

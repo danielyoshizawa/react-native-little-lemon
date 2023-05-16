@@ -7,7 +7,7 @@ import Info from '../components/Info'
 export default function Onboarding({navigation}) {
   return (
     <View style={styles.container}>
-      <Header style={styles} />
+      <Header style={styles} allowProfile={false} />
       <Hero style={styles} />
       <Info navigation={navigation}/>
     </View>

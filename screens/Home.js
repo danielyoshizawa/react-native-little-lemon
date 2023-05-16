@@ -6,7 +6,7 @@ import Menu from '../components/Menu'
 export default function Home({navigation}) {
   return (
     <ScrollView style={styles.container}>
-      <Header style={styles} navigation={navigation}/>
+      <Header style={styles} navigation={navigation} allowProfile={true} />
       <Hero style={styles} />
       <Menu style={styles} />
     </ScrollView>
